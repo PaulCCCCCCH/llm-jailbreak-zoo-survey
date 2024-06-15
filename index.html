@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> JailbreakZoo </title>
+
+    <!-- Style -->
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Fancy Title Fonts -->
+     <!-- Verela - Title -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+     <!-- Open Sans - Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <!-- Fancy Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+    <div class="banner">
+        <div class="header">
+            <p class="header-main"> JailbreakZoo </h1>
+            <p class="header-sub">Survey, Landscapes, and Horizons in Jailbreaking Large Language and Vision-Language
+                Models</p>
+        </div>
+    </div>
+    <nav>
+        <a href="#authors">Authors</a>
+        <a href="#abstract">Abstract</a>
+        <a href="#paper">Paper</a>
+        <a href="#involved">Get Involved</a>
+    </nav>
+    <div class="content">
+        <section id="head-buttons">
+            <button class="head-button" onclick="window.open('https://github.com/Allen-piexl/JailbreakZoo', '_blank')"><i class="fab fa-github"></i> GitHub </button>
+            <button class="head-button" onclick="window.open('https://en.wikipedia.org/wiki/HTTP_404', '_blank')"><i class="far fa-file-lines"></i> arXiv</button>
+        </section>
+
+        <section id="authors">
+            <!-- <h2>Authors</h2>
+            <p><a href="https://ischool.illinois.edu/people/haoyang-liu">Haoyang Liu</a>, <a href="https://maheepchaudhary.github.io/maheep.github.io/">Maheep Chaudhary</a>, and <a href="https://haohanwang.github.io/">Haohan Wang</a></p>
+            <p class="author-affiliation">School of Information Sciences, University of Illinois Urbana-Champaign</p> -->
+
+            <div class="author-list">
+                <div class="author">
+                    <p class="author-head"><strong>Haibo Jin<sup></sup></strong></p>
+                    <p class="author-foot">University of Illinois Urbana-Champaign</p>
+                </div>
+                <div class="author">
+                    <p class="author-head"><strong>Leyang Hu<sup></sup></strong></p>
+                    <p class="author-foot">Brown University</p>
+                </div>
+                <div class="author">
+                    <p class="author-head"><strong>Xinnuo Li</strong></p>
+                    <p class="author-foot">University of Michigan Ann Arbor</p>
+                </div>
+                <div class="author">
+                    <p class="author-head"><strong>Peiyan Zhang</strong></p>
+                    <p class="author-foot">Hong Kong University of Science and Technology</p>
+                </div>
+                <div class="author">
+                    <p class="author-head"><strong>Ruoxi Chen</strong></p>
+                    <p class="author-foot">Zhejiang University of Technology</p>
+                </div>
+                <div class="author">
+                    <p class="author-head"><strong>Chonghan Chen</strong></p>
+                    <p class="author-foot">Carnegie Mellon University</p>
+                </div>
+                <div class="author">
+                    <p class="author-head"><strong>Jun Zhuang</strong></p>
+                    <p class="author-foot">Boise State University</p>
+                </div>
+                <div class="author">
+                    <p class="author-head"><strong>Haohan Wang<sup>*</sup></strong></p>
+                    <p class="author-foot">University of Illinois Urbana-Champaign</p>
+                </div>
+            </div>
+            <!-- <p class="author-foot"> *Haohan Wang is the corresponding author: haohanw@illinois.edu</p> -->
+        </section>
+
+
+        <section id="abstract">
+            <h1>Abstract</h1>
+            <div class="citation-container">
+                <p> The rapid evolution of artificial intelligence (AI) through developments in Large Language Models (LLMs) and Vision-Language Models (VLMs) has brought significant advancements across various technological domains. While these models enhance capabilities in natural language processing and visual interactive tasks, their growing adoption raises critical concerns regarding security and ethical alignment. This survey provides an extensive review of the emerging field of jailbreaking—deliberately circumventing the ethical and operational boundaries of LLMs and VLMs—and the consequent development of defense mechanisms. Our study categorizes jailbreaks into seven distinct types and elaborates on defense strategies that address these vulnerabilities. Through this comprehensive examination, we identify research gaps and propose directions for future studies to enhance the security frameworks of LLMs and VLMs. Our findings underscore the necessity for a unified perspective that integrates both jailbreak strategies and defensive solutions to foster a robust, secure, and reliable environment for the next generation of language models.
+                </p>
+            </div>
+        </section>
+
+
+        <section id="Overview">
+            <h1>Overview</h1>
+            <img id="overview-image" src="paper-overview.png" alt="Overview of the paper">
+        </section>
+
+        <section id="involved">
+            <h2>Get Involved</h2>
+            <div class="action-container">
+                <div class="action-card">
+                    <h3>Suggest Additional Papers</h3>
+                    <p>Help us improve the survey by suggesting additional papers.</p>
+                    <button onclick="window.open('https://forms.gle/wJ48qoh4PNdwFMgy7', '_blank')">Submit a
+                        Paper</button>
+                </div>
+                <div class="action-card">
+                    <h3>Join Our Slack</h3>
+                    <p>Join our community on Slack to discuss ideas, ask questions, and collaborate with new friends.
+                    </p>
+                    <button
+                        onclick="window.open('https://join.slack.com/t/trustworthyml/shared_invite/zt-201foxyh3-KxIx9Xsyk0FIIQ_ToArWgQ', '_blank')">Join
+                        Slack</button>
+                </div>
+                <div class="action-card">
+                    <h3>Sign Up for Reading Groups</h3>
+                    <p>Sign up for our reading groups where we discuss papers and key concepts (currently paused).</p>
+                    <button onclick="window.open('https://groups.google.com/g/trustworthy-ml/', '_blank')">Sign
+                        Up</button>
+                </div>
+            </div>
+            <h2>More Resources</h2>
+            <div class="action-container">
+                <div class="action-card">
+                    <h3>Causality and Vision</h3>
+                    <p>The github page of Maheep's notes on causality and computer vision papers</p>
+                    <button
+                        onclick="window.open('https://github.com/MaheepChaudhary/Causation-inComputerVision', '_blank')">Go
+                        to Github</button>
+                </div>
+                <div class="action-card">
+                    <h3>Trustworthy ML Initiative</h3>
+                    <p>Join our community on Trustworthy Machine Learning Initiative.</p>
+                    <button onclick="window.open('https://www.trustworthyml.org/', '_blank')">Go to the Website</button>
+                </div>
+                <div class="action-card">
+                    <h3>DREAM</h3>
+                    <p>Visit the our new lab at UIUC drafting this survye paper. (site still under construction)</p>
+                    <button onclick="window.open('https://dreamlabuiuc.github.io/', '_blank')">Go to the Lab
+                        Page</button>
+                </div>
+            </div>
+        </section>
+
+        <h2>Citation Guide</h2>
+        <div class="citation-container">
+            <p>If you consider our work useful, please consider cite us:</p>
+            <div>
+                <pre>
+@article{liu2023trustworthy,
+  title={Towards Trustworthy and Aligned Machine Learning: A Data-centric Survey with Causality Perspectives},
+  author={Liu, Haoyang and Chaudhary, Maheep and Wang, Haohan},
+  year={2023},
+  publisher={School of Information Sciences, University of Illinois Urbana-Champaign}
+}
+        </pre>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 University of Illinois Urbana-Champaign</p>
+    </footer>
+    </div>
+</body>
+
+</html>
