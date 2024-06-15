@@ -1,23 +1,28 @@
-body {
-    font-family: 'Open Sans', sans-serif;;
-    line-height: 1.5;
-    background-color: #F2F2F2;
-    text-align: center;
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
 }
 
-
-nav {
+.my-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     padding: 20px;
     background-color: #4d4d4d;
 }
 
-nav a {
+.my-nav > a {
     color: white;
-    margin: 0 15px;
+    margin: 0 30px;
     text-decoration: none;
 }
 
 .content {
+    line-height: 1.5;
+    font-family: 'Open Sans', sans-serif;;
     margin: 20px;
 }
 
@@ -84,51 +89,23 @@ nav a {
     width: 75%;
 }
 
-.action-container {
+.involved-cards {
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
-    flex-wrap: wrap;
+    width: 75%;
 }
 
-.action-card {
-    margin: 20px;
+.resources-cards {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.resources-card {
     padding: 20px;
-    background-color: #F9F9F9;
-    border: 1px solid #ddd;
-    width: 25%;
-    min-width: 300px;
-    text-align: left;
-}
-
-.action-card button {
-    background-color: #0066CC;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s;
-}
-
-.action-card button:hover {
-    background-color: #0052a3;
-}
-
-a {
-    color: #0066CC;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-pre {
-    text-align: left;
-    background-color: #f5f5f5;
-    padding: 15px;
-    overflow-x: auto;
+    min-height: 200px;
+    align-items: center;
 }
 
 .author-affiliation {
@@ -138,7 +115,7 @@ pre {
     /* optional, to reduce space between authors and affiliation */
 }
 
-.citation-container {
+.narrow-container {
     max-width: 800px;
     /* Adjust as needed */
     margin: 0 auto;
