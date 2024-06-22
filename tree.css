@@ -19,6 +19,7 @@
 .link {
     fill: none;
     stroke: #151515;
+    stroke-opacity: 0.1;
     stroke-width: 2px;
 }
 

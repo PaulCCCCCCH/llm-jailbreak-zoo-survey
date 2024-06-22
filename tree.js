@@ -1,5 +1,5 @@
 const treeData = {
-    name: "JailbreakZoo",
+    name: " ",
     children: [
         {
             name: "Background",
@@ -87,7 +87,7 @@ root.x0 = height / 2;
 root.y0 = 0;
 const tree = d3.tree().size([height, width]);
 
-let i = 0; 
+let i = 0;
 
 update(root);
 
@@ -113,7 +113,13 @@ function update(source) {
                 d._children = null;
             }
             update(d);
-        });
+            if (d.data.info) {
+                const modal = new bootstrap.Modal(document.getElementById('infoModal'));
+                document.getElementById('infoModalLabel').textContent = d.data.name;
+                document.querySelector('#infoModal .modal-body').textContent = d.data.info;
+                modal.show();
+            }
+        });;
 
     nodeEnter.append('circle')
         .attr('r', 1e-6)
@@ -124,22 +130,26 @@ function update(source) {
         .attr("x", d => d.children || d._children ? -13 : 13)
         .attr("text-anchor", d => d.children || d._children ? "end" : "start")
         .text(d => d.data.name)
+        .style("font-size", '14px')
         .style("fill-opacity", 1e-6)
-        .attr("class", "node-label")
-        .on('click', (event, d) => {
-            if (d.data.info) {
-                const modal = new bootstrap.Modal(document.getElementById('infoModal'));
-                document.getElementById('infoModalLabel').textContent = d.data.name;
-                document.querySelector('#infoModal .modal-body').textContent = d.data.info;
-                modal.show();
-            }
-        });
+        .attr("class", "node-label");
 
     const nodeUpdate = nodeEnter.merge(node);
 
     nodeUpdate.transition()
         .duration(duration)
-        .attr("transform", d => `translate(${d.y},${d.x})`);
+        .attr("transform", d => `translate(${d.y},${d.x})`)
+        .on('end', function () {
+            nodeUpdate.selectAll('circle, text')
+                .on('mouseover', function (event, d) {
+                    d3.select(this.parentNode).select('circle').transition().duration(200).attr('r', 12).style('fill', '#a91d3a');
+                    d3.select(this.parentNode).select('text').transition().duration(200).style('font-size', '16px');
+                })
+                .on('mouseout', function (event, d) {
+                    d3.select(this.parentNode).select('circle').transition().duration(200).attr('r', 10).style('fill', d => d._children ? "#c73659" : "#eeeeee");
+                    d3.select(this.parentNode).select('text').transition().duration(200).style('font-size', '14px');
+                })
+        });
 
     nodeUpdate.select('circle')
         .attr('r', 10)
