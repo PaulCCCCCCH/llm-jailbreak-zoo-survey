@@ -221,3 +221,40 @@ section {
     height: 100px;
     color: #eeeeee;
 }
+
+
+
+/*
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+*/
+
+
+/* Overwriting Bootstrap h1 styles */
+h1.fancy-title {
+    text-align: center;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+h1.fancy-title::before,
+h1.fancy-title::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background-color: #a91d3a;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+h1.fancy-title::before {
+    left: -60px;
+}
+
+h1.fancy-title::after {
+    right: -60px;
+}
+
