@@ -72,7 +72,7 @@ const treeData = {
 };
 
 const margin = { top: 20, right: 90, bottom: 30, left: 90 };
-const width = 960 - margin.left - margin.right;
+const width = 1200 - margin.left - margin.right;
 const height = 700 - margin.top - margin.bottom;
 
 const svg = d3.select("#tree-container").append("svg")
@@ -96,7 +96,7 @@ function update(source) {
     const nodes = treeData.descendants();
     const links = treeData.descendants().slice(1);
 
-    nodes.forEach(d => { d.y = d.depth * 180; });
+    nodes.forEach(d => { d.y = d.depth * 220; });
 
     const node = svg.selectAll('g.node')
         .data(nodes, d => d.id || (d.id = ++i));

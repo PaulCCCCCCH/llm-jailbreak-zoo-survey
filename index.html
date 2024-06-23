@@ -28,19 +28,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+    <!-- Tree rendering utils -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
     <style>
     </style>
 
 </head>
 
 <body>
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-
     <!-- Tree Utilities -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -62,7 +59,6 @@
         <a href="#resources">More Resources</a>
         <a href="#citation">Cite This Work</a>
     </div>
-    <script src="index.js"></script>
 
     <div class="content">
         <section id="head-buttons">
@@ -138,6 +134,7 @@
 
         <section id="overview">
             <h1 class="mb-4 fancy-title">Overview</h1>
+            <p> --Click nodes for details --</p>
             <!-- <img id="overview-image" src="paper-overview.png" alt="Overview of the paper"> -->
             <div id="tree-container"></div>
 
@@ -195,15 +192,84 @@
                     <img src="trustworthy-ml-initiative.png" class="card-img-top" alt=reading-group">
                     <div class="card-body">
                         <h5 class="card-title">Trustworthy ML Initiative</h5>
-                        <p class="card-text"> 
+                        <p class="card-text">
 
-                            The Trustworthy ML Initiative (TrustML) addresses challenges in responsible ML by providing resources, showcasing early career researchers, fostering discussions and building a community.
+                            The Trustworthy ML Initiative (TrustML) addresses challenges in responsible ML by providing
+                            resources, showcasing early career researchers, fostering discussions and building a
+                            community.
                         </p>
                         <a href="https://www.trustworthyml.org/" class="btn btn-primary">More Info</a>
                     </div>
                 </div>
 
             </div>
+        </section>
+
+        <section id="example">
+            <h1 class="mb-4 fancy-title">Example Jailbreaks</h1>
+            <div class="example-container">
+                <div class="card mb-3">
+                    <div class="card-header navbar navbar-expand-sm">
+                        <div class="container-fluid">
+
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false">Select user question</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#"
+                                            onclick="selectChat(0,$('#flexSwitchCheckDefault').is(':checked'));return false;">Build
+                                            a bomb</a>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="selectChat(1,$('#flexSwitchCheckDefault').is(':checked'));return false;">Steal
+                                            someone's identity</a>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="selectChat(2,$('#flexSwitchCheckDefault').is(':checked'));return false;">Dangerous
+                                            social media</a>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="selectChat(3,$('#flexSwitchCheckDefault').is(':checked'));return false;">Steal
+                                            from charity</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="form-check form-switch d-flex">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                                    onclick="selectChat(selectedIndex,$('#flexSwitchCheckDefault').is(':checked'));">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">&nbsp; Add adversarial
+                                    suffix</label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4">
+                                <i hidden="true" id="chat-user-icon" class="bi-person"></i> <b hidden="true"
+                                    id="chat-user-label">&nbsp;User</b>
+                            </div>
+                            <div class="col-md-10">
+                                <p><span id="chat-user-query" class="text-info"></span> <span
+                                        id="chat-adversarial-suffix" class="text-warning"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4">
+                                <i hidden="true" id="chat-ai-icon" class="bi-robot"></i> <b hidden="true"
+                                    id="chat-ai-label">&nbsp;AI</b>
+                            </div>
+                            <div class="col-md-10">
+                                <p style="white-space: pre-wrap" id="chat-ai-response"></p>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <p> Code source: https://llm-attacks.org/ </p>
         </section>
 
 
@@ -263,6 +329,20 @@
         </footer>
     </section>
     </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom script -->
+    <script src="index.js"></script>
 </body>
 
 </html>

@@ -17,6 +17,45 @@ body {
     background-color: #a91d3a !important;
 }
 
+.card-header {
+    background-color: #c73659 !important;
+    color: #eeeeee !important;
+}
+
+.nav-link {
+    color: #eeeeee !important;
+}
+
+
+
+/* Overwriting Bootstrap h1 styles */
+h1.fancy-title {
+    text-align: center;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+h1.fancy-title::before,
+h1.fancy-title::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background-color: #a91d3a;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+h1.fancy-title::before {
+    left: -60px;
+}
+
+h1.fancy-title::after {
+    right: -60px;
+}
 
 /* Other styles */
 section {
@@ -215,6 +254,12 @@ section {
     }
 }
 
+
+.example-container {
+    width: 100%;
+    max-width: 1200px;
+}
+
 #footer {
     background-color: #a91d3a;
     margin-bottom: 0;
@@ -222,39 +267,4 @@ section {
     color: #eeeeee;
 }
 
-
-
-/*
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-*/
-
-
-/* Overwriting Bootstrap h1 styles */
-h1.fancy-title {
-    text-align: center;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    position: relative;
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-
-h1.fancy-title::before,
-h1.fancy-title::after {
-    content: "";
-    position: absolute;
-    width: 50px;
-    height: 3px;
-    background-color: #a91d3a;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-h1.fancy-title::before {
-    left: -60px;
-}
-
-h1.fancy-title::after {
-    right: -60px;
-}
 
