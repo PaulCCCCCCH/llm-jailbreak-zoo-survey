@@ -55,7 +55,7 @@
         <a href="#authors">Authors</a>
         <a href="#abstract">Abstract</a>
         <a href="#involved">Get Involved</a>
-        <a href="#resources">More Resources</a>
+        <a href="#example">Examples</a>
         <a href="#citation">Cite This Work</a>
     </div>
 
@@ -168,7 +168,7 @@
                     <div class="card-body">
                         <h5 class="card-title">UIUC DREAM Lab</h5>
                         <p class="card-text"> Developing Reliable and Efficient AI for Medicine</p>
-                        <a href="https://dreamlabuiuc.github.io/" class="btn btn-primary">Visit DREAM Lab</a>
+                        <button onclick="window.open('https://dreamlabuiuc.github.io/', '_blank')" class="btn btn-primary">Visit DREAM Lab</button>
                     </div>
                 </div>
 
@@ -177,7 +177,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Suggest Additional Papers</h5>
                         <p class="card-text">Help us improve the survey by suggesting additional papers.</p>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScWbEPqGX2jkquITN2TVIgFD6j758iggWodAjLFTSZyHN9EgA/viewform?usp=sf_link" class="btn btn-primary">Fill This Form</a>
+                        <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScWbEPqGX2jkquITN2TVIgFD6j758iggWodAjLFTSZyHN9EgA/viewform?usp=sf_link', '_blank')" class="btn btn-primary">Fill This Form</button>
                     </div>
                 </div>
 
@@ -187,7 +187,8 @@
                         <h5 class="card-title">Join The Community</h5>
                         <p class="card-text">Join our community on Slack to discuss ideas, ask questions, and
                             collaborate with new friends.</p>
-                        <a href="https://join.slack.com/t/jailbreakzoo/shared_invite/zt-2lkoiuug1-NfmzYedSfMqJaJMg9eNjkw" class="btn btn-primary">Join Slack</a>
+                        <!-- <a href="https://join.slack.com/t/jailbreakzoo/shared_invite/zt-2lkoiuug1-NfmzYedSfMqJaJMg9eNjkw" class="btn btn-primary">Join Slack</a> -->
+                        <button onclick="window.open('https://join.slack.com/t/jailbreakzoo/shared_invite/zt-2lkoiuug1-NfmzYedSfMqJaJMg9eNjkw', '_blank')" class="btn btn-primary">Join Slack</button>
                     </div>
                 </div>
 
@@ -201,7 +202,7 @@
                             resources, showcasing early career researchers, fostering discussions and building a
                             community.
                         </p>
-                        <a href="https://www.trustworthyml.org/" class="btn btn-primary">More Info</a>
+                        <button onclick="window.open('https://www.trustworthyml.org/', '_blank')" class="btn btn-primary">More Info</button>
                     </div>
                 </div>
 
@@ -237,12 +238,16 @@
                                 </li>
                             </ul>
                             <div class="form-check form-switch d-flex">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
-                                    onclick="selectChat(selectedIndex,$('#flexSwitchCheckDefault').is(':checked'));">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">&nbsp; Add adversarial
-                                    suffix</label>
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckAttack"
+                                    onclick="selectChat(selectedIndex,$('#flexSwitchCheckAttack').is(':checked')),$('#flexSwitchCheckDefense').is(':checked');">
+                                <label class="form-check-label" for="flexSwitchCheckAttack">&nbsp; Add adversarial suffix</label>
                             </div>
 
+                            <div class="form-check form-switch d-flex">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefense"
+                                    onclick="selectChat(selectedIndex,$('#flexSwitchCheckAttack').is(':checked')),$('#flexSwitchCheckDefense').is(':checked');">
+                                <label class="form-check-label" for="flexSwitchCheckDefense">&nbsp; Add defense</label>
+                            </div>
                         </div>
                     </div>
 
