@@ -59,19 +59,18 @@ var responses = [
 var selectedIndex = -1;
 var selectedToken = 0;
 
-var selectChat = function (index, attack) {
+var selectChat = function (index, attack, defend) {
+    const attackStr = attack ? responses[index]["attack"] : ""
+    const defenseStr = defend ? responses[index]["defense"] : ""
+    const responseStr = defend || !attack ? responses[index]["response"] : responses[index]["response2"]
     if (index >= 0) {
-        if (attack) {
-            fillChat(responses[index]["user"], responses[index]["attack"], responses[index]["response2"], -1, 0.2, selectedToken + 1);
-        } else {
-            fillChat(responses[index]["user"], "", responses[index]["response"], -1, 0.2, selectedToken + 1);
-        }
+        fillChat(responses[index]["user"], attackStr, defenseStr, responseStr, -1, 0.2, selectedToken + 1);
         selectedIndex = index;
     }
 }
 
 
-var fillChat = function (query, attack, response, index, interval, token) {
+var fillChat = function (query, attack, defense, response, index, interval, token) {
     if (index == -1) {
         selectedToken = token;
         $("#chat-user-icon").prop("hidden", true);
@@ -81,8 +80,9 @@ var fillChat = function (query, attack, response, index, interval, token) {
 
         $("#chat-user-query").text("");
         $("#chat-adversarial-suffix").text("");
+        $("#chat-defense-prefix").text("");
         $("#chat-ai-response").text("");
-        setTimeout(function () { fillChat(query, attack, response, 0, interval, token) }, interval);
+        setTimeout(function () { fillChat(query, attack, defense, response, 0, interval, token) }, interval);
     } else {
         if (selectedToken != token) {
             return;
@@ -92,29 +92,31 @@ var fillChat = function (query, attack, response, index, interval, token) {
             $("#chat-user-icon").prop("hidden", false);
             $("#chat-user-label").prop("hidden", false);
         }
-        if (index == query.length + attack.length) {
+        if (index == query.length + attack.length + defense.length) {
             $("#chat-ai-icon").prop("hidden", false);
             $("#chat-ai-label").prop("hidden", false);
         }
-
-        if (index < query.length) {
-            $("#chat-user-query").append(query[index]);
-            setTimeout(function () { fillChat(query, attack, response, index + 1, interval, token) }, interval);
-        } else if (index < query.length + attack.length) {
-            $("#chat-adversarial-suffix").append(attack[index - query.length]);
-            setTimeout(function () { fillChat(query, attack, response, index + 1, interval, token) }, interval);
-        } else if (index < query.length + attack.length + response.length) {
-            if (response.charCodeAt(index - query.length - attack.length) <= 255) {
-                $("#chat-ai-response").append(response[index - query.length - attack.length]);
+        if (index < defense.length) {
+            $("#chat-defense-prefix").append(defense[index]);
+            setTimeout(function () { fillChat(query, attack, defense, response, index + 1, interval, token) }, interval);
+        } else if (index < defense.length + query.length) {
+            $("#chat-user-query").append(query[index - defense.length]);
+            setTimeout(function () { fillChat(query, attack, defense, response, index + 1, interval, token) }, interval);
+        } else if (index < defense.length + query.length + attack.length) {
+            $("#chat-adversarial-suffix").append(attack[index - query.length - defense.length]);
+            setTimeout(function () { fillChat(query, attack, defense, response, index + 1, interval, token) }, interval);
+        } else if (index < query.length + defense.length + attack.length + response.length) {
+            if (response.charCodeAt(index - query.length - defense.length - attack.length) <= 255) {
+                $("#chat-ai-response").append(response[index - query.length - defense.length - attack.length]);
             } else {
-                $("#chat-ai-response").append(response[index - query.length - attack.length] +
-                    response[index - query.length - attack.length + 1]);
+                $("#chat-ai-response").append(response[index - query.length - defense.length - attack.length] +
+                    response[index - query.length - defense.length - attack.length + 1]);
                 index += 1;
             }
-            setTimeout(function () { fillChat(query, attack, response, index + 1, interval, token) }, interval);
+            setTimeout(function () { fillChat(query, attack, defense, response, index + 1, interval, token) }, interval);
         }
     }
 }
 
 /* Enable the first case as an example */
-selectChat(1, 0)
+selectChat(1, false, false)
