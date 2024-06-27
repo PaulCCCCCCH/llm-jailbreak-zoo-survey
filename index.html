@@ -240,13 +240,13 @@
                             <div class="form-check form-switch d-flex m-2">
                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckAttack"
                                     onclick="selectChat(selectedIndex,$('#flexSwitchCheckAttack').is(':checked'),$('#flexSwitchCheckDefense').is(':checked'));">
-                                <label class="form-check-label" for="flexSwitchCheckAttack">&nbsp; Add adversarial suffix</label>
+                                <label class="form-check-label" for="flexSwitchCheckAttack">&nbsp; Add adversarial prefix</label>
                             </div>
 
                             <div class="form-check form-switch d-flex">
                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefense"
                                     onclick="selectChat(selectedIndex,$('#flexSwitchCheckAttack').is(':checked'),$('#flexSwitchCheckDefense').is(':checked'));">
-                                <label class="form-check-label" for="flexSwitchCheckDefense">&nbsp; Add defense</label>
+                                <label class="form-check-label" for="flexSwitchCheckDefense">&nbsp; Add defense prefix</label>
                             </div>
                         </div>
                     </div>
@@ -260,8 +260,8 @@
                             <div class="col-md-10">
                                 <p>
                                     <span id="chat-defense-prefix" class="text-danger"></span> 
+                                    <span id="chat-adversarial-prefix" class="text-warning"></span>                                     
                                     <span id="chat-user-query" class="text-info"></span> 
-                                    <span id="chat-adversarial-suffix" class="text-warning"></span>                                     
                                 </p>
                             </div>
                         </div>
