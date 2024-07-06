@@ -352,143 +352,151 @@ const margin = { top: 20, right: 90, bottom: 30, left: 90 };
 const width = 1200 - margin.left - margin.right;
 const height = 700 - margin.top - margin.bottom;
 
-const svg = d3.select("#tree-container").append("svg")
-    .attr("width", width + margin.right + margin.left)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-const duration = 750;
-const root = d3.hierarchy(treeData, d => d.children);
-root.x0 = height / 2;
-root.y0 = 0;
-const tree = d3.tree().size([height, width]);
+// Disable tree visualization for phones
+if (window.matchMedia(`(min-width: ${width}px`).matches) {
+    const svg = d3.select("#tree-container").append("svg")
+        .attr("width", width + margin.right + margin.left)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-let i = 0;
+    const duration = 750;
+    const root = d3.hierarchy(treeData, d => d.children);
+    root.x0 = height / 2;
+    root.y0 = 0;
+    const tree = d3.tree().size([height, width]);
 
-update(root);
+    let i = 0;
 
-function update(source) {
-    const treeData = tree(root);
-    const nodes = treeData.descendants();
-    const links = treeData.descendants().slice(1);
+    update(root);
 
-    nodes.forEach(d => { d.y = d.depth * 220; });
 
-    const node = svg.selectAll('g.node')
-        .data(nodes, d => d.id || (d.id = ++i));
+    function update(source) {
+        const treeData = tree(root);
+        const nodes = treeData.descendants();
+        const links = treeData.descendants().slice(1);
 
-    const nodeEnter = node.enter().append('g')
-        .attr('class', 'node')
-        .attr("transform", d => `translate(${source.y0},${source.x0})`)
-        .on('click', (event, d) => {
-            if (d.children) {
-                d._children = d.children;
-                d.children = null;
-            } else {
-                d.children = d._children;
-                d._children = null;
-            }
-            update(d);
-            if (d.data.info) {
-                const modal = new bootstrap.Modal(document.getElementById('infoModal'));
-                document.getElementById('infoModalLabel').textContent = d.data.name;
-                document.querySelector('#infoModal .modal-body').innerHTML = d.data.info;
-                MathJax.typeset();
-                modal.show();
-            }
-        });;
+        nodes.forEach(d => { d.y = d.depth * 220; });
 
-    nodeEnter.append('circle')
-        .attr('r', 1e-6)
-        .style("fill", d => d._children ? "#a91d3a" : "#eeeeee");
+        const node = svg.selectAll('g.node')
+            .data(nodes, d => d.id || (d.id = ++i));
 
-    nodeEnter.append('text')
-        .attr("dy", ".35em")
-        .attr("x", d => d.children || d._children ? -13 : 13)
-        .attr("text-anchor", d => d.children || d._children ? "end" : "start")
-        .text(d => d.data.name)
-        .style("font-size", '14px')
-        .style("fill-opacity", 1e-6)
-        .attr("class", "node-label");
+        const nodeEnter = node.enter().append('g')
+            .attr('class', 'node')
+            .attr("transform", d => `translate(${source.y0},${source.x0})`)
+            .on('click', (event, d) => {
+                if (d.children) {
+                    d._children = d.children;
+                    d.children = null;
+                } else {
+                    d.children = d._children;
+                    d._children = null;
+                }
+                update(d);
+                if (d.data.info) {
+                    const modal = new bootstrap.Modal(document.getElementById('infoModal'));
+                    document.getElementById('infoModalLabel').textContent = d.data.name;
+                    document.querySelector('#infoModal .modal-body').innerHTML = d.data.info;
+                    MathJax.typeset();
+                    modal.show();
+                }
+            });;
 
-    const nodeUpdate = nodeEnter.merge(node);
+        nodeEnter.append('circle')
+            .attr('r', 1e-6)
+            .style("fill", d => d._children ? "#a91d3a" : "#eeeeee");
 
-    nodeUpdate.transition()
-        .duration(duration)
-        .attr("transform", d => `translate(${d.y},${d.x})`)
-        .on('end', function () {
-            nodeUpdate.selectAll('circle, text')
-                .on('mouseover', function (event, d) {
-                    d3.select(this.parentNode).select('circle').transition().duration(200).attr('r', 12).style('fill', '#a91d3a');
-                    d3.select(this.parentNode).select('text').transition().duration(200).style('font-size', '16px');
-                })
-                .on('mouseout', function (event, d) {
-                    d3.select(this.parentNode).select('circle').transition().duration(200).attr('r', 10).style('fill', d => d._children ? "#c73659" : "#eeeeee");
-                    d3.select(this.parentNode).select('text').transition().duration(200).style('font-size', '14px');
-                })
+        nodeEnter.append('text')
+            .attr("dy", ".35em")
+            .attr("x", d => d.children || d._children ? -13 : 13)
+            .attr("text-anchor", d => d.children || d._children ? "end" : "start")
+            .text(d => d.data.name)
+            .style("font-size", '14px')
+            .style("fill-opacity", 1e-6)
+            .attr("class", "node-label");
+
+        const nodeUpdate = nodeEnter.merge(node);
+
+        nodeUpdate.transition()
+            .duration(duration)
+            .attr("transform", d => `translate(${d.y},${d.x})`)
+            .on('end', function () {
+                nodeUpdate.selectAll('circle, text')
+                    .on('mouseover', function (event, d) {
+                        d3.select(this.parentNode).select('circle').transition().duration(200).attr('r', 12).style('fill', '#a91d3a');
+                        d3.select(this.parentNode).select('text').transition().duration(200).style('font-size', '16px');
+                    })
+                    .on('mouseout', function (event, d) {
+                        d3.select(this.parentNode).select('circle').transition().duration(200).attr('r', 10).style('fill', d => d._children ? "#c73659" : "#eeeeee");
+                        d3.select(this.parentNode).select('text').transition().duration(200).style('font-size', '14px');
+                    })
+            });
+
+        nodeUpdate.select('circle')
+            .attr('r', 10)
+            .style("fill", d => d._children ? "#c73659" : "#eeeeee")
+            .attr('cursor', 'pointer');
+
+        nodeUpdate.select('text')
+            .style("fill-opacity", 1);
+
+        const nodeExit = node.exit().transition()
+            .duration(duration)
+            .attr("transform", d => `translate(${source.y},${source.x})`)
+            .remove();
+
+        nodeExit.select('circle')
+            .attr('r', 1e-6);
+
+        nodeExit.select('text')
+            .style('fill-opacity', 1e-6);
+
+        const link = svg.selectAll('path.link')
+            .data(links, d => d.id);
+
+        const linkEnter = link.enter().insert('path', "g")
+            .attr("class", "link")
+            .attr('d', d => {
+                const o = { x: source.x0, y: source.y0 };
+                return diagonal(o, o);
+            });
+
+        const linkUpdate = linkEnter.merge(link);
+
+        linkUpdate.transition()
+            .duration(duration)
+            .attr('d', d => diagonal(d, d.parent));
+
+        link.exit().transition()
+            .duration(duration)
+            .attr('d', d => {
+                const o = { x: source.x, y: source.y };
+                return diagonal(o, o);
+            })
+            .remove();
+
+        nodes.forEach(d => {
+            d.x0 = d.x;
+            d.y0 = d.y;
         });
 
-    nodeUpdate.select('circle')
-        .attr('r', 10)
-        .style("fill", d => d._children ? "#c73659" : "#eeeeee")
-        .attr('cursor', 'pointer');
+        function diagonal(s, d) {
+            return `M ${s.y} ${s.x}
+                C ${(s.y + d.y) / 2} ${s.x},
+                    ${(s.y + d.y) / 2} ${d.x},
+                    ${d.y} ${d.x}`;
+        }
+    }
 
-    nodeUpdate.select('text')
-        .style("fill-opacity", 1);
-
-    const nodeExit = node.exit().transition()
-        .duration(duration)
-        .attr("transform", d => `translate(${source.y},${source.x})`)
-        .remove();
-
-    nodeExit.select('circle')
-        .attr('r', 1e-6);
-
-    nodeExit.select('text')
-        .style('fill-opacity', 1e-6);
-
-    const link = svg.selectAll('path.link')
-        .data(links, d => d.id);
-
-    const linkEnter = link.enter().insert('path', "g")
-        .attr("class", "link")
-        .attr('d', d => {
-            const o = { x: source.x0, y: source.y0 };
-            return diagonal(o, o);
-        });
-
-    const linkUpdate = linkEnter.merge(link);
-
-    linkUpdate.transition()
-        .duration(duration)
-        .attr('d', d => diagonal(d, d.parent));
-
-    link.exit().transition()
-        .duration(duration)
-        .attr('d', d => {
-            const o = { x: source.x, y: source.y };
-            return diagonal(o, o);
-        })
-        .remove();
-
-    nodes.forEach(d => {
-        d.x0 = d.x;
-        d.y0 = d.y;
+    anime({
+        targets: '#tree-container',
+        opacity: [0, 1],
+        translateY: [50, 0],
+        easing: 'easeOutExpo',
+        duration: 1500
     });
 
-    function diagonal(s, d) {
-        return `M ${s.y} ${s.x}
-            C ${(s.y + d.y) / 2} ${s.x},
-                ${(s.y + d.y) / 2} ${d.x},
-                ${d.y} ${d.x}`;
-    }
+} else {
+    d3.select("#tree-container").append('div').text("Visualization only supported on wider devices")
 }
-
-anime({
-    targets: '#tree-container',
-    opacity: [0, 1],
-    translateY: [50, 0],
-    easing: 'easeOutExpo',
-    duration: 1500
-});

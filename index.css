@@ -7,6 +7,15 @@ body {
     color: #151515 !important;
 }
 
+pre {
+    white-space: pre-wrap !important; 
+    overflow-x: auto !important;
+    width: 100% !important;
+    border: 1px solid #ccc !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+}
+
 
 .btn-primary {
     background-color: #c73659 !important;
@@ -188,20 +197,10 @@ section {
 .involved-cards {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     width: 75%;
-}
-
-.resources-cards {
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-}
-
-.resources-card {
-    padding: 20px;
-    min-height: 200px;
-    align-items: center;
+    gap: 20px;
 }
 
 .author-affiliation {
